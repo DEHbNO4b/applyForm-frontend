@@ -10,17 +10,17 @@ import { useState } from 'react';
 function ApplyForm() {
     const url = "http://localhost:9090"
     const [form, setForm] = useState({
-        firstName: '',
-        lastName: '',
-        fathersName: '',
-        borneDate: '',
+        first_name: '',
+        last_name: '',
+        fathers_name: '',
+        borne_date: '',
         adress1: '',
         adress2: '',
-        passportSeries: '',
-        passportNumber: '',
-        dateIssue: '',
-        propertyType: '',
-        propertyNumber: '',
+        passport_series: 0,
+        passport_number: '',
+        date_issue: '',
+        property_type: '',
+        property_number: '',
         amount: '',
         date: '',
     })
@@ -28,34 +28,45 @@ function ApplyForm() {
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
-
+    const checkForm = function (f) {
+        for (var key in f) {
+            if (f[key] === "") {
+                alert("заполните поле " + key)
+                return false
+            }
+        }
+        return true
+    }
     const submitButton = (e) => {
         e.preventDefault();
-        console.log(form);
-
+        let checking = checkForm(form)
+        if (checking === false) {
+            return
+        }
         fetch(url + `/applyes`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
             body: JSON.stringify(form)
+        }).then(response => {
+            if (response.status !== 200) { alert("что то не так: " + response.status + response.statusText) }
+            else { alert("Данные заявления добавлены на сервер")}
         })
-        // resetButton()
+        resetButton()
     }
+
     const resetButton = () => {
         setForm({
-            firstName: '',
-            lastName: '',
-            fathersName: '',
-            borneDate: '',
+            first_name: '',
+            last_name: '',
+            fathers_name: '',
+            borne_date: '',
             adress1: '',
             adress2: '',
-            passportSeries: '',
-            passportNumber: '',
-            dateIssue: '',
-            propertyType: '',
-            propertyNumber: '',
-            propertyNumber2: '',
+            passport_series: '',
+            passport_number: '',
+            date_issue: '',
+            property_type: '',
+            property_number: '',
+            property_number2: '',
             amount: '',
             date: '',
         })
@@ -67,22 +78,23 @@ function ApplyForm() {
             <Form >
                 <Row>
                     <Col>
-                        <Form.Label>Имя</Form.Label>
-                        <FormControl type='text' name='firstName' className='form-control' onChange={handleChange} />
+                        <Form.Label>Фамилия</Form.Label>
+                        <FormControl type='text' name='last_name' className='form-control' onChange={handleChange} />
                     </Col>
                     <Col>
-                        <Form.Label>Фамилия</Form.Label>
-                        <FormControl type='text' name='lastName' className='form-control' onChange={handleChange} />
+                        <Form.Label>Имя</Form.Label>
+                        <FormControl type='text' name='first_name' className='form-control' onChange={handleChange} />
                     </Col>
+
                     <Col>
                         <Form.Label>Отчество</Form.Label>
-                        <FormControl type='text' name='fathersName' onChange={handleChange} />
+                        <FormControl type='text' name='fathers_name' onChange={handleChange} />
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Form.Label>Дата рождения</Form.Label>
-                        <FormControl type='date' name='borneDate' onChange={handleChange} />
+                        <FormControl type='date' name='borne_date' onChange={handleChange} />
                     </Col>
                 </Row>
                 <Form.Group className="mb-3" controlId=''>
@@ -92,21 +104,21 @@ function ApplyForm() {
                 <Row>
                     <Col>
                         <Form.Label>Серия паспорта</Form.Label>
-                        <FormControl type='number' name='passportSeries' onChange={handleChange} />
+                        <FormControl type='number' name='passport_series' onChange={handleChange} />
                     </Col>
                     <Col>
                         <Form.Label>Номер паспорта</Form.Label>
-                        <FormControl type='number' name='passportNumber' onChange={handleChange} />
+                        <FormControl type='number' name='passport_number' onChange={handleChange} />
                     </Col>
                     <Col>
                         <Form.Label>Дата выдачи</Form.Label>
-                        <FormControl type='date' name='dateIssue' onChange={handleChange} />
+                        <FormControl type='date' name='date_issue' onChange={handleChange} />
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Form.Label >Тип недвижимости</Form.Label>
-                        <Form.Select onChange={handleChange} name='propertyType' type='text'>
+                        <Form.Select onChange={handleChange} name='property_type' type='text'>
                             <option  >Выберите тип жилья</option>
                             <option value="Квартира" >Квартира</option>
                             <option value="Земельный участок" >Земельный участок</option>
@@ -115,11 +127,11 @@ function ApplyForm() {
                     </Col>
                     <Col>
                         <Form.Label>Кадастровый номер</Form.Label>
-                        <FormControl type='text' name='propertyNumber' onChange={handleChange} />
+                        <FormControl type='text' name='property_number' onChange={handleChange} />
                     </Col>
                     <Col>
                         <Form.Label>Кадастровый номер 2</Form.Label>
-                        <FormControl type='text' name='propertyNumber2' onChange={handleChange} />
+                        <FormControl type='text' name='property_number2' onChange={handleChange} />
                     </Col>
                     <Col>
                         <Form.Label>Сумма запрашиваемого займа</Form.Label>
@@ -131,12 +143,12 @@ function ApplyForm() {
                     <Form.Control type='text' name='adress2' onChange={handleChange} />
                 </Form.Group>
                 <Form.Label>Дата</Form.Label>
-                <FormControl type='date' name='date' />
+                <FormControl type='date' name='date' onChange={handleChange} />
                 <Col>
                     <Button variant="primary" type="submit" onClick={submitButton} className="me-4 btn btn-success btn-lg btn-block">
                         Submit
                     </Button>
-                    <Button variant='danger' type='submit' onClick={resetButton}>Reset</Button>
+                    <Button variant='danger' type='reset' onClick={resetButton}>Reset</Button>
                 </Col>
             </Form>
         </div>
