@@ -20,7 +20,8 @@ function ApplyForm() {
         passport_number: '',
         date_issue: '',
         property_type: '',
-        property_number: '',
+        property_number1: '',
+        property_number2: '',
         amount: '',
         date: '',
     })
@@ -48,7 +49,7 @@ function ApplyForm() {
             body: JSON.stringify(form)
         }).then(response => {
             if (response.status !== 200) { alert("что то не так: " + response.status + response.statusText) }
-            else { alert("Данные заявления добавлены на сервер")}
+            else { alert("Данные заявления добавлены на сервер") }
         })
         resetButton()
     }
@@ -65,7 +66,7 @@ function ApplyForm() {
             passport_number: '',
             date_issue: '',
             property_type: '',
-            property_number: '',
+            property_number1: '',
             property_number2: '',
             amount: '',
             date: '',
@@ -127,7 +128,7 @@ function ApplyForm() {
                     </Col>
                     <Col>
                         <Form.Label>Кадастровый номер</Form.Label>
-                        <FormControl type='text' name='property_number' onChange={handleChange} />
+                        <FormControl type='text' name='property_number1' onChange={handleChange} />
                     </Col>
                     <Col>
                         <Form.Label>Кадастровый номер 2</Form.Label>
