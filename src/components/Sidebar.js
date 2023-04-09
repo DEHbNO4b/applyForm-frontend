@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 function Sidebar() {
 
 
-    const url = "http://localhost:9090"
+    const url = "http://188.120.232.145:9090"
     const [applyesStatus, setApplyesStatus] = useState("loading..")
     const [applyes, setApplyes] = useState([{ apply_id: "qwe", first_name: "", last_name: "", fathers_name: "", date: "" }])
     useEffect(() => {

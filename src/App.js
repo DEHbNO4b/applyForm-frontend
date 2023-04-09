@@ -13,7 +13,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 
 
 function App() {
-  const url = "http://localhost:9090"
+  //const url = "http://localhost:9090"
   return (
     <div className="App">
       <Container >

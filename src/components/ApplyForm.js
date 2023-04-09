@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import { FormControl } from 'react-bootstrap';
 import { useState } from 'react';
 function ApplyForm() {
-    const url = "http://localhost:9090"
+    const url = "http://188.120.232.145:9090"
     const [form, setForm] = useState({
         first_name: '',
         last_name: '',

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import PdfComponent from "./PdfComponent"
 
 function ApplyVew() {
-    const url = "http://localhost:9090/"
+    const url = "http://188.120.232.145:9090/"
     let [apply, setApply] = useState({first_name:"",last_name:"", fathers_name:'', borne_date:'', adress1:'',
     passport_series:'', passport_number:'', date_issue:'', property_type:'',
     property_number1:'', property_number2:'', amount:'', adress2:'', date:''})
