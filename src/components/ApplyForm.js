@@ -7,16 +7,14 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FormControl } from 'react-bootstrap';
 import { useState } from 'react';
-function ApplyForm() {
-    const url = "http://188.120.232.145:9090"
+
+function ApplyForm(props) {
+
     const [form, setForm] = useState({
         first_name: '',
         last_name: '',
         fathers_name: '',
         borne_date: '',
-        adress1: '',
-        adress2: '',
-        passport_series: 0,
         passport_number: '',
         date_issue: '',
         property_type: '',
@@ -44,7 +42,8 @@ function ApplyForm() {
         if (checking === false) {
             return
         }
-        fetch(url + `/applyes`, {
+        fetch(props.url + `/applyes`, {
+
             method: 'POST',
             body: JSON.stringify(form)
         }).then(response => {
@@ -60,9 +59,6 @@ function ApplyForm() {
             last_name: '',
             fathers_name: '',
             borne_date: '',
-            adress1: '',
-            adress2: '',
-            passport_series: '',
             passport_number: '',
             date_issue: '',
             property_type: '',
@@ -98,15 +94,15 @@ function ApplyForm() {
                         <FormControl type='date' name='borne_date' onChange={handleChange} />
                     </Col>
                 </Row>
-                <Form.Group className="mb-3" controlId=''>
+                {/* <Form.Group className="mb-3" controlId=''>
                     <Form.Label>Адрес места прописки</Form.Label>
                     <Form.Control type='text' name='adress1' onChange={handleChange} />
-                </Form.Group>
+                </Form.Group> */}
                 <Row>
-                    <Col>
+                    {/* <Col>
                         <Form.Label>Серия паспорта</Form.Label>
                         <FormControl type='number' name='passport_series' onChange={handleChange} />
-                    </Col>
+                    </Col> */}
                     <Col>
                         <Form.Label>Номер паспорта</Form.Label>
                         <FormControl type='number' name='passport_number' onChange={handleChange} />
@@ -139,10 +135,10 @@ function ApplyForm() {
                         <FormControl type='number' name='amount' onChange={handleChange} />
                     </Col>
                 </Row>
-                <Form.Group className="mb-3" controlId='formGridAdress2'>
+                {/* <Form.Group className="mb-3" controlId='formGridAdress2'>
                     <Form.Label>Адрес ипотечного жилья</Form.Label>
                     <Form.Control type='text' name='adress2' onChange={handleChange} />
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Label>Дата</Form.Label>
                 <FormControl type='date' name='date' onChange={handleChange} />
                 <Col>

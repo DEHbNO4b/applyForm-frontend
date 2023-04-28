@@ -13,7 +13,8 @@ import { Col, Container, Row } from 'react-bootstrap';
 
 
 function App() {
-  //const url = "http://localhost:9090"
+  const url = "http://localhost:9090"
+  //const url = "http://188.120.232.145:9090"
   return (
     <div className="App">
       <Container >
@@ -21,12 +22,12 @@ function App() {
           <Header />
         </Row>
         <Row >
-          <Col xs={4}>  <Sidebar />  </Col>
+          <Col xs={4}>  <Sidebar url={url}/>  </Col>
           {/*  */}
           <Col >
             <Routes>
-              <Route path='/apply_maker' element={<ApplyForm />} />
-              <Route path='/apply/:applyId' element={<ApplyVew />} />
+              <Route path='/apply_maker' element={<ApplyForm url={url} />} />
+              <Route path='/apply/:applyId' element={<ApplyVew  url={url} />} />
               <Route path="/" element={<Home />} />
               <Route path="/about_us" element={<AboutUs />} />
             </Routes>

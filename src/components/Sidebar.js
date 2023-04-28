@@ -1,24 +1,28 @@
 import React from "react";
-import { Card, ListGroup } from "react-bootstrap";
+import { Button, Card, ListGroup } from "react-bootstrap";
 import { useEffect, useState } from "react"
 
 
-function Sidebar() {
+function Sidebar(props) {
 
 
-    const url = "http://188.120.232.145:9090"
-    const [applyesStatus, setApplyesStatus] = useState("loading..")
-    const [applyes, setApplyes] = useState([{ apply_id: "qwe", first_name: "", last_name: "", fathers_name: "", date: "" }])
-    useEffect(() => {
-        fetch(url + `/applyes`)
+    // const [applyesStatus, setApplyesStatus] = useState("loading..")
+    const [applyes, setApplyes] = useState([])
+    useEffect((e) => {
+        fetch(props.url + `/applyes`)
+            //.then(r => { if (r === null) { return null } })
             .then(r => r.json())
-            .then(d => setApplyes(d))
+            .then(d => { if (d !== null) { setApplyes(d) } })
     }, []);
-
+    const sendDel = (id) => {
+        fetch(props.url + `/del/` + id, { method: 'DELETE' })
+            .then(r => { if (r.status !== 200) { alert("Что-то не так") } })
+    }
     const ApplyCollection = applyes.map((el) =>
     (<ListGroup.Item key={el.apply_id} >
-        <div style={{flexDirection:'column'}}>{el.last_name + " " + el.first_name + ", " + el.date}</div>
-        <Card.Link href={'/apply/'+el.apply_id} >load</Card.Link>
+        <div style={{ flexDirection: 'column' }}>{el.last_name + " " + el.first_name + ", " + el.date}</div>
+        <Card.Link href={'/apply/' + el.apply_id} style={{ margin: '5px', }}>load</Card.Link>
+        <Button variant='danger' onClick={() => sendDel(el.apply_id)}>delete</Button>
     </ListGroup.Item>))
 
     return (
@@ -26,7 +30,8 @@ function Sidebar() {
         <Card border="primary" style={{ margin: '5px', }} >
             <Card.Header>
                 <Card.Title>заявления</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{applyesStatus}</Card.Subtitle>
+                {/* <Card.Subtitle className="mb-2 text-muted">{applyesStatus}</Card.Subtitle> */}
+                <Card.Subtitle className="mb-2 text-muted"></Card.Subtitle>
             </Card.Header>
             <Card.Body>
                 <ListGroup variant="flush">
