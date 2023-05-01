@@ -29,6 +29,7 @@ function ApplyForm(props) {
     }
     const checkForm = function (f) {
         for (var key in f) {
+            if(key==="property_number2"){continue}
             if (f[key] === "") {
                 alert("заполните поле " + key)
                 return false
@@ -98,11 +99,11 @@ function ApplyForm(props) {
                 <Row>
 
                     <Col>
-                        <Form.Label>Номер паспорта</Form.Label>
+                        <Form.Label>Серия и номер паспорта</Form.Label>
                         <FormControl type='text' name='passport_number' onChange={handleChange} />
                     </Col>
                     <Col>
-                        <Form.Label>Дата выдачи</Form.Label>
+                        <Form.Label>Дата выдачи паспорта</Form.Label>
                         <FormControl type='date' name='date_issue' onChange={handleChange} />
                     </Col>
                 </Row>
@@ -110,18 +111,17 @@ function ApplyForm(props) {
                     <Col>
                         <Form.Label >Тип недвижимости</Form.Label>
                         <Form.Select onChange={handleChange} name='property_type' type='text'>
-                            <option  >Выберите тип жилья</option>
                             <option value="Квартира" >Квартира</option>
                             <option value="Земельный участок" >Земельный участок</option>
                             <option value="Дом"  >Дом</option>
                         </Form.Select>
                     </Col>
                     <Col>
-                        <Form.Label>Кадастровый номер</Form.Label>
+                        <Form.Label>Кадастровый номер объекта недвижимости</Form.Label>
                         <FormControl type='text' name='property_number1' onChange={handleChange} />
                     </Col>
                     <Col>
-                        <Form.Label>Кадастровый номер 2</Form.Label>
+                        <Form.Label>Кадастровый номер земельного участка</Form.Label>
                         <FormControl type='text' name='property_number2' onChange={handleChange} />
                     </Col>
                     <Col>
@@ -133,7 +133,7 @@ function ApplyForm(props) {
                     <Form.Label>Адрес ипотечного жилья</Form.Label>
                     <Form.Control type='text' name='adress2' onChange={handleChange} />
                 </Form.Group> */}
-                <Form.Label>Дата</Form.Label>
+                <Form.Label>Дата создания заявления</Form.Label>
                 <FormControl type='date' name='date' onChange={handleChange} />
                 <Col>
                     <Button variant="primary" type="submit" onClick={submitButton} className="me-4 btn btn-success btn-lg btn-block">

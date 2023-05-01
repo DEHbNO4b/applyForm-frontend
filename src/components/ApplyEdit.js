@@ -35,6 +35,7 @@ function ApplyEdit(props) {
     }
     const checkForm = function (f) {
         for (var key in f) {
+            if(key==="property_number2"){continue}
             if (f[key] === "") {
                 alert("заполните поле " + key)
                 return false
@@ -104,11 +105,11 @@ function ApplyEdit(props) {
 
                 <Row>
                     <Col>
-                        <Form.Label>Номер паспорта</Form.Label>
+                        <Form.Label>Серия и номер паспорта</Form.Label>
                         <FormControl type='text' name='passport_number' onChange={handleChange} value={form.passport_number} />
                     </Col>
                     <Col>
-                        <Form.Label>Дата выдачи</Form.Label>
+                        <Form.Label>Дата выдачи паспорта</Form.Label>
                         <FormControl type='date' name='date_issue' onChange={handleChange} value={form.date_issue} />
                     </Col>
                 </Row>
@@ -116,18 +117,17 @@ function ApplyEdit(props) {
                     <Col>
                         <Form.Label >Тип недвижимости</Form.Label>
                         <Form.Select onChange={handleChange} name='property_type' type='text' value={form.property_type}>
-                            <option  >Выберите тип жилья</option>
                             <option value="Квартира" >Квартира</option>
                             <option value="Земельный участок" >Земельный участок</option>
                             <option value="Дом"  >Дом</option>
                         </Form.Select>
                     </Col>
                     <Col>
-                        <Form.Label>Кадастровый номер</Form.Label>
+                        <Form.Label>Кадастровый номер объекта недвижимости</Form.Label>
                         <FormControl type='text' name='property_number1' onChange={handleChange} value={form.property_number1} />
                     </Col>
                     <Col>
-                        <Form.Label>Кадастровый номер 2</Form.Label>
+                        <Form.Label>Кадастровый номер земельного участка</Form.Label>
                         <FormControl type='text' name='property_number2' onChange={handleChange} value={form.property_number2} />
                     </Col>
                     <Col>
@@ -135,7 +135,7 @@ function ApplyEdit(props) {
                         <FormControl type='number' name='amount' onChange={handleChange} value={form.amount} />
                     </Col>
                 </Row>
-                <Form.Label>Дата</Form.Label>
+                <Form.Label>Дата создания заявления</Form.Label>
                 <FormControl type='date' name='date' onChange={handleChange} value={form.date} />
                 <Col>
                     <Button variant="primary" type="submit" onClick={submitButton} className="me-4 btn btn-success btn-lg btn-block">

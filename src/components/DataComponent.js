@@ -6,6 +6,7 @@ const thStyle = {
   fontStyle: "normal"
 };
 
+
 class DataComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -13,6 +14,19 @@ class DataComponent extends React.Component {
   }
   componentDidUpdate() {
 
+  }
+  componentDidMount(){
+    console.log(this.props.data)
+  }
+  cadastrZemlya(){
+      if(this.props.data.property_number2){
+        return(
+          <tr>
+              <th>Кадастровый номер земельного участка</th>
+              <th>{this.props.data.property_number2}</th>
+            </tr>
+        )
+      }
   }
   render() {
     return (
@@ -38,7 +52,7 @@ class DataComponent extends React.Component {
           Прошу Вас выдать мне ипотечный займ для приобретения недвижимости:
         </Row>
 
-        <table style={thStyle} className="table">
+        <Table striped bordered hover>
           <thead>
             {/* <tr>
                 {/* <th>Product A</th>
@@ -54,21 +68,22 @@ class DataComponent extends React.Component {
               <th>Кадастровый номер объекта недвижимости, планируемого к приобретению</th>
               <th>{this.props.data.property_number1}</th>
             </tr>
+            {this.cadastrZemlya()}
             <tr>
               <th>Сумма займа</th>
               <th>{this.props.data.amount} руб.</th>
             </tr>
           </tbody>
-        </table>
+        </Table>
         <Row >
-              С общими усовиями предоставления займов ознакомлен, в том числе, проинформирован о возможности реструктуризации долга; 
-              мне также известно, что за предоставление недостоверных сведений  с целью получения указанного займа  я несу уголовную ответственность.
-              В связи с чем, я даю свое полное согласие на проверку предоставленных мной документов.
+          С общими усовиями предоставления займов ознакомлен, в том числе, проинформирован о возможности реструктуризации долга;
+          мне также известно, что за предоставление недостоверных сведений  с целью получения указанного займа  я несу уголовную ответственность.
+          В связи с чем, я даю свое полное согласие на проверку предоставленных мной документов.
         </Row>
         <Row>
 
-          <Col style = {{display:'flex',justifyContent:'center'}}>{this.props.data.date}</Col>
-          <Col style = {{display:'flex',justifyContent:'center'}}>____________________________</Col>
+          <Col style={{ display: 'flex', justifyContent: 'center' }}>{this.props.data.date}</Col>
+          <Col style={{ display: 'flex', justifyContent: 'center' }}>____________________________</Col>
 
         </Row>
       </div>
