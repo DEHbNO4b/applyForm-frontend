@@ -21,8 +21,10 @@ function Sidebar(props) {
     const ApplyCollection = applyes.map((el) =>
     (<ListGroup.Item key={el.apply_id} >
         <div style={{ flexDirection: 'column' }}>{el.last_name + " " + el.first_name + ", " + el.date}</div>
-        <Card.Link href={'/apply/' + el.apply_id} style={{ margin: '5px', }}>load</Card.Link>
-        <Button variant='danger' onClick={() => sendDel(el.apply_id)}>delete</Button>
+        <Card.Link href={'/apply/' + el.apply_id} style={{ margin: '5px', }}>vew</Card.Link>
+        <Card.Link href={'/apply_edit/' + el.apply_id} style={{ margin: '5px', }}>edit</Card.Link>
+        {/* <Button variant='info' onClick={console.log()} style={{ margin: '5px', }}>edit</Button> */}
+        <Button variant='danger' style={{ margin: '5px', }} onClick={() => sendDel(el.apply_id)}>delete</Button>
     </ListGroup.Item>))
 
     return (

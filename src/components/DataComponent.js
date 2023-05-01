@@ -22,7 +22,10 @@ class DataComponent extends React.Component {
           <Col style={{ fontSize: '30' }}>
             <u>   Директору ООО "Строй-06"<br></br> Джумулдаевой Петимат Абдуловне <br></br>
               {this.props.data.last_name} {this.props.data.first_name} {this.props.data.fathers_name}<br></br>
-              {this.props.data.adress1}
+              {this.props.data.borne_date} г.р.<br></br>
+              паспорт: {this.props.data.passport_number}<br></br>
+              дата выдачи: {this.props.data.date_issue}<br></br>
+
             </u>
           </Col>
         </Row>
@@ -32,7 +35,7 @@ class DataComponent extends React.Component {
           </div>
         </Row>
         <Row>
-          Прошу Вас выдать мне ипотечный займ для приобретения недвижимости по следующим параметрам:
+          Прошу Вас выдать мне ипотечный займ для приобретения недвижимости:
         </Row>
 
         <table style={thStyle} className="table">

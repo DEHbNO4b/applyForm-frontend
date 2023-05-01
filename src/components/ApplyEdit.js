@@ -1,15 +1,14 @@
 
-//import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FormControl } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom"
 
-function ApplyForm(props) {
-
+function ApplyEdit(props) {
+    let { applyId } = useParams()
     const [form, setForm] = useState({
         first_name: '',
         last_name: '',
@@ -23,6 +22,13 @@ function ApplyForm(props) {
         amount: '',
         date: '',
     })
+
+
+    useEffect(() => {
+        fetch(props.url + `/applye/` + applyId)
+            .then((r) => r.json())
+            .then(d => setForm(d))
+    }, []);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -38,13 +44,14 @@ function ApplyForm(props) {
     }
     const submitButton = (e) => {
         e.preventDefault();
+        console.log(form)
         let checking = checkForm(form)
         if (checking === false) {
             return
         }
-        fetch(props.url + `/applyes`, {
+        fetch(props.url + `/putapply/`+ applyId, {
 
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify(form)
         }).then(response => {
             if (response.status !== 200) { alert("что то не так: " + response.status + response.statusText) }
@@ -76,40 +83,39 @@ function ApplyForm(props) {
                 <Row>
                     <Col>
                         <Form.Label>Фамилия</Form.Label>
-                        <FormControl type='text' name='last_name' className='form-control' onChange={handleChange} />
+                        <FormControl type='text' name='last_name' className='form-control' onChange={handleChange} value={form.last_name} />
                     </Col>
                     <Col>
                         <Form.Label>Имя</Form.Label>
-                        <FormControl type='text' name='first_name' className='form-control' onChange={handleChange} />
+                        <FormControl type='text' name='first_name' className='form-control' onChange={handleChange} value={form.first_name} />
                     </Col>
 
                     <Col>
                         <Form.Label>Отчество</Form.Label>
-                        <FormControl type='text' name='fathers_name' onChange={handleChange} />
+                        <FormControl type='text' name='fathers_name' onChange={handleChange} value={form.fathers_name} />
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Form.Label>Дата рождения</Form.Label>
-                        <FormControl type='date' name='borne_date' onChange={handleChange} />
+                        <FormControl type='date' name='borne_date' onChange={handleChange} value={form.borne_date} />
                     </Col>
                 </Row>
 
                 <Row>
-
                     <Col>
                         <Form.Label>Номер паспорта</Form.Label>
-                        <FormControl type='text' name='passport_number' onChange={handleChange} />
+                        <FormControl type='text' name='passport_number' onChange={handleChange} value={form.passport_number} />
                     </Col>
                     <Col>
                         <Form.Label>Дата выдачи</Form.Label>
-                        <FormControl type='date' name='date_issue' onChange={handleChange} />
+                        <FormControl type='date' name='date_issue' onChange={handleChange} value={form.date_issue} />
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Form.Label >Тип недвижимости</Form.Label>
-                        <Form.Select onChange={handleChange} name='property_type' type='text'>
+                        <Form.Select onChange={handleChange} name='property_type' type='text' value={form.property_type}>
                             <option  >Выберите тип жилья</option>
                             <option value="Квартира" >Квартира</option>
                             <option value="Земельный участок" >Земельный участок</option>
@@ -118,23 +124,19 @@ function ApplyForm(props) {
                     </Col>
                     <Col>
                         <Form.Label>Кадастровый номер</Form.Label>
-                        <FormControl type='text' name='property_number1' onChange={handleChange} />
+                        <FormControl type='text' name='property_number1' onChange={handleChange} value={form.property_number1} />
                     </Col>
                     <Col>
                         <Form.Label>Кадастровый номер 2</Form.Label>
-                        <FormControl type='text' name='property_number2' onChange={handleChange} />
+                        <FormControl type='text' name='property_number2' onChange={handleChange} value={form.property_number2} />
                     </Col>
                     <Col>
                         <Form.Label>Сумма запрашиваемого займа</Form.Label>
-                        <FormControl type='number' name='amount' onChange={handleChange} />
+                        <FormControl type='number' name='amount' onChange={handleChange} value={form.amount} />
                     </Col>
                 </Row>
-                {/* <Form.Group className="mb-3" controlId='formGridAdress2'>
-                    <Form.Label>Адрес ипотечного жилья</Form.Label>
-                    <Form.Control type='text' name='adress2' onChange={handleChange} />
-                </Form.Group> */}
                 <Form.Label>Дата</Form.Label>
-                <FormControl type='date' name='date' onChange={handleChange} />
+                <FormControl type='date' name='date' onChange={handleChange} value={form.date} />
                 <Col>
                     <Button variant="primary" type="submit" onClick={submitButton} className="me-4 btn btn-success btn-lg btn-block">
                         Submit
@@ -146,4 +148,4 @@ function ApplyForm(props) {
     );
 }
 
-export default ApplyForm;
+export default ApplyEdit;

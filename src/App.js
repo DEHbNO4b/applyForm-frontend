@@ -3,6 +3,7 @@ import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import AboutUs from './components/AboutUs';
 import ApplyForm from './components/ApplyForm'
+import ApplyEdit from './components/ApplyEdit';
 import ApplyVew from './components/ApplyVew';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
@@ -22,12 +23,13 @@ function App() {
           <Header />
         </Row>
         <Row >
-          <Col xs={4}>  <Sidebar url={url}/>  </Col>
+          <Col xs={4}>  <Sidebar url={url} />  </Col>
           {/*  */}
           <Col >
             <Routes>
               <Route path='/apply_maker' element={<ApplyForm url={url} />} />
-              <Route path='/apply/:applyId' element={<ApplyVew  url={url} />} />
+              <Route path='/apply_edit/:applyId' element={<ApplyEdit url={url} />} />
+              <Route path='/apply/:applyId' element={<ApplyVew url={url} />} />
               <Route path="/" element={<Home />} />
               <Route path="/about_us" element={<AboutUs />} />
             </Routes>
